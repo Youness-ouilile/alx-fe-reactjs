@@ -5,7 +5,7 @@ const UserProfile = (props) => {
     <div>
       <h2>Name: {props.name}</h2>
       <p>Age: {props.age}</p>
-      <p>bio: {props.bio}</p>
+      <p>Bio: {props.Bio}</p>
       
     </div>
   );
