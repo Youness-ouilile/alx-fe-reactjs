@@ -35,4 +35,4 @@ const EditRecipeForm = ({ recipe }) => {
   );
 };
 
-export { EditRecipeForm };
+export default EditRecipeForm;
