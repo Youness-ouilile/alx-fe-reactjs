@@ -7,7 +7,7 @@ const RecipeList = () => {
     <div>
       <h2>Recipe List</h2>
       {recipes.length === 0 ? (
-        <p>No recipes added yet.</p>
+        <p>No recipes available.</p>
       ) : (
         recipes.map((recipe) => (
           <div key={recipe.id}>
@@ -20,4 +20,4 @@ const RecipeList = () => {
   );
 };
 
-export default RecipeList;
+export { RecipeList };

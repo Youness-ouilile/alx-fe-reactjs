@@ -8,8 +8,12 @@ const AddRecipeForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (title && description) {
-      addRecipe({ id: Date.now(), title, description });
+    if (title.trim() && description.trim()) {
+      addRecipe({
+        id: Date.now(), // Using timestamp as a unique ID
+        title,
+        description,
+      });
       setTitle('');
       setDescription('');
     }
@@ -18,22 +22,20 @@ const AddRecipeForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="title">Title</label>
         <input
           type="text"
-          id="title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="Recipe Title"
+          required
         />
       </div>
       <div>
-        <label htmlFor="description">Description</label>
         <textarea
-          id="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Recipe Description"
+          required
         />
       </div>
       <button type="submit">Add Recipe</button>
@@ -41,4 +43,4 @@ const AddRecipeForm = () => {
   );
 };
 
-export default AddRecipeForm;
+export { AddRecipeForm };
