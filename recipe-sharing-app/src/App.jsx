@@ -6,8 +6,8 @@ import RecipeList from './components/RecipeList';
 import AddRecipeForm from './components/AddRecipeForm';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import SearchBar from './components/SearchBar';
-import FavoritesList from './FavoritesList';
-import RecommendationsList from './RecommendationsList';
+import FavoritesList from './components/FavoritesList';
+import RecommendationsList from './components/RecommendationsList';
 
 import RecipeDetails from './components/RecipeDetails';
 
