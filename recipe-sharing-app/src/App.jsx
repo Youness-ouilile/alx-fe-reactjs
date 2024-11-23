@@ -6,6 +6,8 @@ import RecipeList from './components/RecipeList';
 import AddRecipeForm from './components/AddRecipeForm';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import SearchBar from './components/SearchBar';
+import FavoritesList from './FavoritesList';
+import RecommendationsList from './RecommendationsList';
 
 import RecipeDetails from './components/RecipeDetails';
 
@@ -31,6 +33,17 @@ function App() {
           
           <Route path="/recipe/:recipeId" element={<RecipeDetails />} />
         </Routes>
+        <Switch>
+          <Route path="/favorites">
+            <FavoritesList />
+          </Route>
+          <Route path="/recommendations">
+            <RecommendationsList />
+          </Route>
+          <Route path="/">
+            <RecipeList />
+          </Route>
+        </Switch>
       </div>
       <h1>Vite + React</h1>
       <div className="card">
