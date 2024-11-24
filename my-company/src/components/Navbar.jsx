@@ -18,6 +18,7 @@ function Navbar() {
           <Link to="/contact" style={{ color: 'white', textDecoration: 'none' }}>Contact</Link>
         </li>
       </ul>
+      <p>we can do it</p>
     </nav>
   );
 };
