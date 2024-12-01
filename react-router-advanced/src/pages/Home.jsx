@@ -1,15 +1,23 @@
 import React from 'react';
+import { useAuth } from '../context/AuthContext'; // Import useAuth
 
 const Home = () => {
-  const login = () => {
-   
-    localStorage.setItem('isAuthenticated', 'true');
-  };
+  const { isAuthenticated, login, logout } = useAuth();
 
   return (
     <div>
       <h2>Home Page</h2>
-      <button onClick={login}>Login</button>
+      {isAuthenticated ? (
+        <>
+          <p>You are logged in!</p>
+          <button onClick={logout}>Logout</button>
+        </>
+      ) : (
+        <>
+          <p>You are not logged in!</p>
+          <button onClick={login}>Login</button>
+        </>
+      )}
     </div>
   );
 };
