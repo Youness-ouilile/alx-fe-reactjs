@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 
 const RegistrationForm = () => {
@@ -11,6 +10,11 @@ const RegistrationForm = () => {
     email: '',
     password: '',
   });
+
+ 
+  const setErrors = (errors) => {
+    setFormErrors(errors);
+  };
 
   const validate = () => {
     const errors = {};
@@ -38,7 +42,7 @@ const RegistrationForm = () => {
     e.preventDefault();
 
     const errors = validate();
-    setFormErrors(errors);
+    setErrors(errors);
 
     if (Object.keys(errors).length > 0) {
       setError('Please fix the errors above');
