@@ -1,3 +1,4 @@
+// src/App.jsx
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -46,7 +47,10 @@ function App() {
             path="/profile/*"
             element={<ProtectedRoute element={<Profile />} isAuthenticated={isAuthenticated} />}
           />
-          <Route path="/blog/:postId" element={<BlogPost />} /> {/* Dynamic route for BlogPost */}
+          
+          {/* Dynamic Route for Blog Posts */}
+          <Route path="/blog/:id" element={<BlogPost />} />  {/* This is where the dynamic blog post route is defined */}
+          
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
@@ -55,3 +59,4 @@ function App() {
 }
 
 export default App;
+
