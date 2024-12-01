@@ -1,7 +1,7 @@
+
 import React, { useState } from 'react';
 
 const RegistrationForm = () => {
-
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -12,23 +12,19 @@ const RegistrationForm = () => {
     password: '',
   });
 
-
   const validate = () => {
     const errors = {};
 
- 
     if (!username) {
       errors.username = 'Username is required';
     }
 
-  
     if (!email) {
       errors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(email)) {
       errors.email = 'Email is invalid';
     }
 
-    
     if (!password) {
       errors.password = 'Password is required';
     } else if (password.length < 6) {
@@ -41,7 +37,6 @@ const RegistrationForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-
     const errors = validate();
     setFormErrors(errors);
 
@@ -50,11 +45,9 @@ const RegistrationForm = () => {
       return;
     }
 
-
     const userData = { username, email, password };
     console.log('User registered:', userData);
 
-    
     setUsername('');
     setEmail('');
     setPassword('');
