@@ -4,7 +4,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Home from './pages/Home';
 import About from './pages/About';
 import Profile from './pages/Profile';
-import BlogPost from './pages/BlogPost'; // Import BlogPost component
+import BlogPost from './pages/BlogPost';  // Import the BlogPost component
 import NotFound from './pages/NotFound';
 
 function App() {
