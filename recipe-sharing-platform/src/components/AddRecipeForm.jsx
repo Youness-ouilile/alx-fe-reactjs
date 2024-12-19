@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const AddRecipeForm = () => {
-  // State variables for the form fields
+  // State variables for form fields
   const [title, setTitle] = useState('');
   const [ingredients, setIngredients] = useState('');
   const [steps, setSteps] = useState('');
@@ -13,11 +13,8 @@ const AddRecipeForm = () => {
     steps: '',
   });
 
-  // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Validate form fields
+  // Validation function
+  const validate = () => {
     let formErrors = {};
 
     // Title validation
@@ -45,23 +42,36 @@ const AddRecipeForm = () => {
       }
     }
 
+    // Return the errors object
+    return formErrors;
+  };
+
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Validate form before submission
+    const formErrors = validate();
+    
     // If there are errors, set them and stop form submission
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors);
       return;
     }
 
-    // If no errors, reset errors and submit data
+    // If no errors, clear errors and proceed with form submission
     setErrors({});
+
+    // Prepare the data (split ingredients and steps)
     const newRecipe = {
       title,
       ingredients: ingredients.split(',').map((ingredient) => ingredient.trim()),
       steps: steps.split('\n').map((step) => step.trim()).filter((step) => step !== ''),
     };
 
-    console.log('New Recipe:', newRecipe); // In real-world, send this data to a server
+    console.log('New Recipe:', newRecipe); // In a real app, send this to a server
 
-    // Reset the form after submission
+    // Reset the form after successful submission
     setTitle('');
     setIngredients('');
     setSteps('');
@@ -133,3 +143,4 @@ const AddRecipeForm = () => {
 };
 
 export default AddRecipeForm;
+
