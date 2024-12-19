@@ -1,0 +1,36 @@
+[
+    {
+      "id": 1,
+      "title": "Tortilla Omelette",
+      "summary": "The Perfect Breakfast Hack!",
+      "image": "https://easyrecipegang.com.au/wp-content/uploads/2024/09/Tortilla-Omelette.jpg",
+      "ingredients": [
+      "2 large eggs",
+      "1 tortilla",
+      "1/4 cup shredded cheese (cheddar, mozzarella, or your favourite)",
+      "1/4 cup diced vegetables (bell peppers, onions, tomatoes, or your choice)",
+      "Salt and pepper to taste",
+      "Optional: crispy bacon bits, ham, or any preferred protein",
+      "Cooking spray or a brush of oil"
+    ],
+    "instructions": "1. Boil the pasta. 2. Fry pancetta and garlic. 3. Mix eggs and parmesan. 4. Combine pasta, pancetta, and egg mixture."
+    },
+    {
+      "id": 2,
+      "title": "Ham and Cheese Danish",
+      "summary": "Puff Pastry Perfection You’ll Crave.",
+      "image": "https://easyrecipegang.com.au/wp-content/uploads/2024/12/ham-and-cheese-danish.jpg",
+      "ingredients": [
+      "puff pastry sheets",
+      "1 bunch fresh basil",
+      "1/2 cup pine nuts",
+      "1/2 cup parmesan cheese, grated",
+      "1/2 cup olive oil",
+      "juice of 1 lemon",
+      "sliced ham",
+      "sliced cheese",
+      "1 egg, whisked"
+    ],
+    "instructions": "1. Grill the chicken pieces. 2. Cook the onion and tomatoes with spices. 3. Add cream and chicken. 4. Garnish with coriander."
+    }
+  ]
