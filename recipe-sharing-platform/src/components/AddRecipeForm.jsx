@@ -79,9 +79,9 @@ const AddRecipeForm = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h2 className="text-3xl font-semibold mb-6">Add a New Recipe</h2>
+      <h2 className="text-3xl font-semibold mb-6 text-center">Add a New Recipe</h2>
 
-      <form onSubmit={handleSubmit} className="bg-white shadow-lg rounded-lg p-6 space-y-6">
+      <form onSubmit={handleSubmit} className="bg-white shadow-lg rounded-lg p-6 space-y-6 max-w-md mx-auto md:max-w-lg md:p-8">
         {/* Recipe Title */}
         <div>
           <label htmlFor="title" className="block text-lg font-medium mb-2">Recipe Title</label>
@@ -143,4 +143,5 @@ const AddRecipeForm = () => {
 };
 
 export default AddRecipeForm;
+
 
