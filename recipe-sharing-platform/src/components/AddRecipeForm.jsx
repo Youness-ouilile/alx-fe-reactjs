@@ -1,28 +1,22 @@
 import React, { useState } from 'react';
 
 const AddRecipeForm = () => {
-  // State variables for form fields
   const [title, setTitle] = useState('');
   const [ingredients, setIngredients] = useState('');
   const [steps, setSteps] = useState('');
-  
-  // State to track errors
   const [errors, setErrors] = useState({
     title: '',
     ingredients: '',
     steps: '',
   });
 
-  // Validation function
   const validate = () => {
     let formErrors = {};
 
-    // Title validation
     if (!title) {
       formErrors.title = 'Recipe title is required.';
     }
 
-    // Ingredients validation
     if (!ingredients) {
       formErrors.ingredients = 'Ingredients are required.';
     } else {
@@ -32,7 +26,6 @@ const AddRecipeForm = () => {
       }
     }
 
-    // Steps validation
     if (!steps) {
       formErrors.steps = 'Steps are required.';
     } else {
@@ -42,36 +35,28 @@ const AddRecipeForm = () => {
       }
     }
 
-    // Return the errors object
     return formErrors;
   };
 
-  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validate form before submission
     const formErrors = validate();
     
-    // If there are errors, set them and stop form submission
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors);
       return;
     }
 
-    // If no errors, clear errors and proceed with form submission
     setErrors({});
-
-    // Prepare the data (split ingredients and steps)
     const newRecipe = {
       title,
       ingredients: ingredients.split(',').map((ingredient) => ingredient.trim()),
       steps: steps.split('\n').map((step) => step.trim()).filter((step) => step !== ''),
     };
 
-    console.log('New Recipe:', newRecipe); // In a real app, send this to a server
+    console.log('New Recipe:', newRecipe);
 
-    // Reset the form after successful submission
     setTitle('');
     setIngredients('');
     setSteps('');
@@ -82,7 +67,6 @@ const AddRecipeForm = () => {
       <h2 className="text-3xl font-semibold mb-6 text-center">Add a New Recipe</h2>
 
       <form onSubmit={handleSubmit} className="bg-white shadow-lg rounded-lg p-6 space-y-6 max-w-md mx-auto md:max-w-lg md:p-8">
-        {/* Recipe Title */}
         <div>
           <label htmlFor="title" className="block text-lg font-medium mb-2">Recipe Title</label>
           <input
@@ -97,7 +81,6 @@ const AddRecipeForm = () => {
           {errors.title && <p className="text-red-500 text-sm mt-2">{errors.title}</p>}
         </div>
 
-        {/* Ingredients */}
         <div>
           <label htmlFor="ingredients" className="block text-lg font-medium mb-2">Ingredients (comma separated)</label>
           <textarea
@@ -112,7 +95,6 @@ const AddRecipeForm = () => {
           {errors.ingredients && <p className="text-red-500 text-sm mt-2">{errors.ingredients}</p>}
         </div>
 
-        {/* Recipe Steps */}
         <div>
           <label htmlFor="steps" className="block text-lg font-medium mb-2">Recipe Steps</label>
           <textarea
@@ -128,7 +110,6 @@ const AddRecipeForm = () => {
           <p className="text-sm text-gray-500 mt-2">Please list each step of the recipe on a new line.</p>
         </div>
 
-        {/* Submit Button */}
         <div>
           <button
             type="submit"
