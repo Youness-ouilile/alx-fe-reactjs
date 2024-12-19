@@ -1,25 +1,35 @@
 import React, { useState } from 'react';
 
 const AddRecipeForm = () => {
-  
+ 
   const [title, setTitle] = useState('');
   const [ingredients, setIngredients] = useState('');
-  const [instructions, setInstructions] = useState('');
+  const [steps, setSteps] = useState('');
   const [error, setError] = useState('');
 
-  
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    
-    if (!title || !ingredients || !instructions) {
+   
+    if (!title || !ingredients || !steps) {
       setError('All fields are required.');
       return;
     }
 
+   
     const ingredientsList = ingredients.split(',').map((ingredient) => ingredient.trim());
+
     if (ingredientsList.length < 2) {
       setError('Please provide at least two ingredients.');
+      return;
+    }
+
+   
+    const stepsList = steps.split('\n').map((step) => step.trim()).filter((step) => step !== '');
+
+    if (stepsList.length < 1) {
+      setError('Please provide at least one step.');
       return;
     }
 
@@ -28,14 +38,14 @@ const AddRecipeForm = () => {
     const newRecipe = {
       title,
       ingredients: ingredientsList,
-      instructions,
+      steps: stepsList,
     };
 
     console.log('New Recipe:', newRecipe);
     
     setTitle('');
     setIngredients('');
-    setInstructions('');
+    setSteps('');
   };
 
   return (
@@ -45,7 +55,7 @@ const AddRecipeForm = () => {
       {error && <div className="text-red-500 mb-4">{error}</div>}
 
       <form onSubmit={handleSubmit} className="bg-white shadow-lg rounded-lg p-6 space-y-6">
-        
+        {/* Recipe Title */}
         <div>
           <label htmlFor="title" className="block text-lg font-medium mb-2">Recipe Title</label>
           <input
@@ -59,7 +69,7 @@ const AddRecipeForm = () => {
           />
         </div>
 
-      
+        
         <div>
           <label htmlFor="ingredients" className="block text-lg font-medium mb-2">Ingredients (comma separated)</label>
           <textarea
@@ -75,16 +85,17 @@ const AddRecipeForm = () => {
 
        
         <div>
-          <label htmlFor="instructions" className="block text-lg font-medium mb-2">Instructions</label>
+          <label htmlFor="steps" className="block text-lg font-medium mb-2">Recipe Steps</label>
           <textarea
-            id="instructions"
-            name="instructions"
-            value={instructions}
-            onChange={(e) => setInstructions(e.target.value)}
+            id="steps"
+            name="steps"
+            value={steps}
+            onChange={(e) => setSteps(e.target.value)}
             className="w-full p-3 border border-gray-300 rounded-lg"
-            placeholder="Enter cooking instructions"
+            placeholder="Enter each step on a new line"
             rows="6"
           />
+          <p className="text-sm text-gray-500 mt-2">Please list each step of the recipe on a new line.</p>
         </div>
 
        
