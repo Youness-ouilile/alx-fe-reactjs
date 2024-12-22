@@ -1,29 +1,30 @@
 import { useState } from 'react';
 import { fetchUserData } from '../services/githubService';
 
-function SearchBar({ setUserData, setLoading, setError }) {
+function Search({ setUserData, setLoading, setError }) {
   const [username, setUsername] = useState('');
 
+  // Handle the search form submission
   const handleSearch = async (e) => {
     e.preventDefault();
 
-   
+    // Clear previous results and set loading state
     setLoading(true);
     setError(null);
     setUserData(null);
 
     try {
-     
+      // Fetch user data using the GitHub API
       const data = await fetchUserData(username);
       if (data) {
-        setUserData(data); 
+        setUserData(data); // Set user data if found
       } else {
-        setError("Looks like we can't find the user"); 
+        setError("Looks like we can't find the user"); // Show error if no user found
       }
     } catch (err) {
-      setError('There was an error fetching the data'); 
+      setError('There was an error fetching the data'); // Handle API errors
     } finally {
-      setLoading(false); 
+      setLoading(false); // Set loading to false after the API call completes
     }
   };
 
@@ -42,4 +43,4 @@ function SearchBar({ setUserData, setLoading, setError }) {
   );
 }
 
-export default SearchBar;
+export default Search;
