@@ -1,23 +1,42 @@
 import { useState } from 'react';
 import { fetchUserData } from '../services/githubAPI';
 
-function SearchBar({ setUserData }) {
+function SearchBar({ setUserData, setLoading, setError }) {
   const [username, setUsername] = useState('');
 
-  const handleSearch = async () => {
-    const data = await fetchUserData(username);
-    setUserData(data);
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    
+    setLoading(true);
+    setError(null);
+    setUserData(null);
+
+    try {
+     
+      const data = await fetchUserData(username);
+      if (data) {
+        setUserData(data);
+      } else {
+        setError('Looks like we can\'t find the user');
+      }
+    } catch (err) {
+      setError('There was an error fetching the data');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div>
-      <input
-        type="text"
-        placeholder="Enter GitHub username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <button onClick={handleSearch}>Search</button>
+      <form onSubmit={handleSearch}>
+        <input
+          type="text"
+          placeholder="Enter GitHub username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <button type="submit">Search</button>
+      </form>
     </div>
   );
 }

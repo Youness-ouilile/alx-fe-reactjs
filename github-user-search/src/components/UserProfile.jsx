@@ -1,6 +1,4 @@
 function UserProfile({ user }) {
-    if (!user) return null;
-  
     return (
       <div>
         <h2>{user.name}</h2>
@@ -14,4 +12,3 @@ function UserProfile({ user }) {
   }
   
   export default UserProfile;
-  
