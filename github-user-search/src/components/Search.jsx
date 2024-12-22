@@ -6,7 +6,8 @@ function SearchBar({ setUserData, setLoading, setError }) {
 
   const handleSearch = async (e) => {
     e.preventDefault();
-    
+
+   
     setLoading(true);
     setError(null);
     setUserData(null);
@@ -15,14 +16,14 @@ function SearchBar({ setUserData, setLoading, setError }) {
      
       const data = await fetchUserData(username);
       if (data) {
-        setUserData(data);
+        setUserData(data); 
       } else {
-        setError('Looks like we can\'t find the user');
+        setError("Looks like we can't find the user"); 
       }
     } catch (err) {
-      setError('There was an error fetching the data');
+      setError('There was an error fetching the data'); 
     } finally {
-      setLoading(false);
+      setLoading(false); 
     }
   };
 
