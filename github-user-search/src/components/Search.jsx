@@ -8,12 +8,11 @@ function Search({ setUserData, setLoading, setError }) {
   const [results, setResults] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Handle search input changes
   const handleChange = (e, setter) => {
     setter(e.target.value);
   };
 
-  // Handle search form submission
+ 
   const handleSearch = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -23,7 +22,7 @@ function Search({ setUserData, setLoading, setError }) {
     try {
       const data = await fetchUserData(username, location, minRepos, currentPage);
       if (data) {
-        setResults(data.items); // Assuming data comes as items in a paginated response
+        setResults(data.items); 
       } else {
         setError("No users found with those criteria.");
       }
@@ -78,7 +77,7 @@ function Search({ setUserData, setLoading, setError }) {
         </button>
       </form>
 
-      {/* Results Section */}
+     
       <div className="mt-6">
         {results.length > 0 ? (
           results.map((user) => (
@@ -107,7 +106,7 @@ function Search({ setUserData, setLoading, setError }) {
         )}
       </div>
 
-      {/* Pagination - Simple "Load More" */}
+      
       {results.length > 0 && (
         <div className="mt-4">
           <button
