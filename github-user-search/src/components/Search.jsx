@@ -24,10 +24,10 @@ function Search({ setUserData, setLoading, setError }) {
       if (data) {
         setResults(data.items); 
       } else {
-        setError("No users found with those criteria.");
+        setError("Looks like we cant find the user");
       }
     } catch (err) {
-      setError('Error fetching data.');
+      setError('Looks like we cant find the user');
     } finally {
       setLoading(false);
     }
@@ -37,7 +37,7 @@ function Search({ setUserData, setLoading, setError }) {
     <div className="max-w-2xl mx-auto p-4">
       <form onSubmit={handleSearch} className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700">GitHub Username</label>
+          <label className='block text-sm font-medium text-red-700'>GitHub Username</label>
           <input
             type="text"
             placeholder="Search by GitHub username"
@@ -85,7 +85,7 @@ function Search({ setUserData, setLoading, setError }) {
               <img
                 src={user.avatar_url}
                 alt={user.login}
-                className="w-16 h-16 rounded-full"
+                className="w-64 h-64 rounded-2xl shadow-lg hover:scale-105 transition-all duration-300" 
               />
               <div>
                 <a

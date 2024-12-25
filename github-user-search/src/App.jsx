@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import './App.css';
+import './app.css';
 import SearchBar from './components/Search';
 import UserProfile from './components/UserProfile';
+import './index.css';
 
 function App() {
   const [userData, setUserData] = useState(null);
