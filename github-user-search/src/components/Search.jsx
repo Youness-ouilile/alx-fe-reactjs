@@ -4,17 +4,17 @@ import { fetchUserData } from '../services/githubService';
 function Search({ setUserData, setLoading, setError }) {
   const [username, setUsername] = useState('');
 
-  // Handle the search form submission
+ 
   const handleSearch = async (e) => {
     e.preventDefault();
 
-    // Clear previous results and set loading state
+    
     setLoading(true);
     setError(null);
     setUserData(null);
 
     try {
-      // Fetch user data using the GitHub API
+      
       const data = await fetchUserData(username);
       if (data) {
         setUserData(data); // Set user data if found
@@ -25,6 +25,12 @@ function Search({ setUserData, setLoading, setError }) {
       setError('There was an error fetching the data'); // Handle API errors
     } finally {
       setLoading(false); // Set loading to false after the API call completes
+    }
+     try {
+      const response = await axios.get(`https://api.github.com/users/${username}`);
+      setUserData(response.data);
+    } catch (err) {
+      setError('User not found or invalid username.');
     }
   };
 
