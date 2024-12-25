@@ -23,7 +23,7 @@ function Search({ setUserData, setLoading, setError }) {
           html_url: data.html_url
         });
       } else {
-        setError("Looks like we can't find the user"); // Handle user not found
+        setError("Looks like we cant find the usergit"); // Handle user not found
       }
     } catch (err) {
       setError('There was an error fetching the data'); // Handle API errors
@@ -44,7 +44,7 @@ function Search({ setUserData, setLoading, setError }) {
         <button type="submit">Search</button>
       </form>
 
-      {/* Display user info if data is available */}
+      
       {setUserData && (
         <div style={{ display: 'flex', alignItems: 'center', marginTop: '20px' }}>
           <img
@@ -61,7 +61,7 @@ function Search({ setUserData, setLoading, setError }) {
         </div>
       )}
 
-      {/* Display error if it exists */}
+      
       {setError && <p style={{ color: 'red' }}>{setError}</p>}
     </div>
   );
