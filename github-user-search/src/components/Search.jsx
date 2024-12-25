@@ -3,66 +3,121 @@ import { fetchUserData } from '../services/githubService';
 
 function Search({ setUserData, setLoading, setError }) {
   const [username, setUsername] = useState('');
+  const [location, setLocation] = useState('');
+  const [minRepos, setMinRepos] = useState(0);
+  const [results, setResults] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
+  // Handle search input changes
+  const handleChange = (e, setter) => {
+    setter(e.target.value);
+  };
+
+  // Handle search form submission
   const handleSearch = async (e) => {
     e.preventDefault();
-
     setLoading(true);
     setError(null);
-    setUserData(null);
+    setResults([]);
 
     try {
-      // Fetch user data from GitHub API
-      const data = await fetchUserData(username);
-      
-      // If data is returned, set the user data
+      const data = await fetchUserData(username, location, minRepos, currentPage);
       if (data) {
-        setUserData({
-          avatar_url: data.avatar_url,
-          login: data.login,
-          html_url: data.html_url
-        });
+        setResults(data.items); // Assuming data comes as items in a paginated response
       } else {
-        setError("Looks like we cant find the usergit"); // Handle user not found
+        setError("No users found with those criteria.");
       }
     } catch (err) {
-      setError('There was an error fetching the data'); // Handle API errors
+      setError('Error fetching data.');
     } finally {
-      setLoading(false); // Set loading to false after API call
+      setLoading(false);
     }
   };
 
   return (
-    <div>
-      <form onSubmit={handleSearch}>
-        <input
-          type="text"
-          placeholder="Enter GitHub username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <button type="submit">Search</button>
+    <div className="max-w-2xl mx-auto p-4">
+      <form onSubmit={handleSearch} className="space-y-4">
+        <div>
+          <label className="block text-sm font-medium text-gray-700">GitHub Username</label>
+          <input
+            type="text"
+            placeholder="Search by GitHub username"
+            value={username}
+            onChange={(e) => handleChange(e, setUsername)}
+            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Location</label>
+          <input
+            type="text"
+            placeholder="Search by location"
+            value={location}
+            onChange={(e) => handleChange(e, setLocation)}
+            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Minimum Repositories</label>
+          <input
+            type="number"
+            placeholder="Minimum repositories"
+            value={minRepos}
+            onChange={(e) => handleChange(e, setMinRepos)}
+            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+          />
+        </div>
+
+        <button
+          type="submit"
+          className="w-full bg-indigo-600 text-white p-2 rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500"
+        >
+          Search
+        </button>
       </form>
 
-      
-      {setUserData && (
-        <div style={{ display: 'flex', alignItems: 'center', marginTop: '20px' }}>
-          <img
-            src={setUserData.avatar_url}
-            alt={setUserData.login}
-            style={{ width: '100px', height: '100px', borderRadius: '50%', marginRight: '15px' }}
-          />
-          <div>
-            <h2>{setUserData.login}</h2>
-            <a href={setUserData.html_url} target="_blank" rel="noopener noreferrer">
-              Visit GitHub Profile
-            </a>
-          </div>
+      {/* Results Section */}
+      <div className="mt-6">
+        {results.length > 0 ? (
+          results.map((user) => (
+            <div key={user.id} className="flex items-center space-x-4 border-b py-4">
+              <img
+                src={user.avatar_url}
+                alt={user.login}
+                className="w-16 h-16 rounded-full"
+              />
+              <div>
+                <a
+                  href={user.html_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-lg font-semibold text-indigo-600"
+                >
+                  {user.login}
+                </a>
+                <p className="text-gray-500 text-sm">{user.location || 'No location provided'}</p>
+                <p className="text-gray-500 text-sm">Repositories: {user.public_repos}</p>
+              </div>
+            </div>
+          ))
+        ) : (
+          <p className="text-gray-500">No results found.</p>
+        )}
+      </div>
+
+      {/* Pagination - Simple "Load More" */}
+      {results.length > 0 && (
+        <div className="mt-4">
+          <button
+            onClick={() => setCurrentPage(currentPage + 1)}
+            className="bg-indigo-600 text-white p-2 rounded-md hover:bg-indigo-700"
+          >
+            Load More
+          </button>
         </div>
       )}
-
-      
-      {setError && <p style={{ color: 'red' }}>{setError}</p>}
     </div>
   );
 }
